@@ -1,4 +1,4 @@
-﻿namespace Concurrency;
+﻿namespace Functional;
 
 public class Class1
 {
