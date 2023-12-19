@@ -2,7 +2,7 @@ namespace CreationalPattern;
 
 public class MazeGame
 {
-    public static Maze CreateMaze()
+    public Maze CreateMaze()
     {
         var maze = new Maze();
         var r1 = new Room(1);
@@ -24,7 +24,7 @@ public class MazeGame
         return maze;
     }
 
-    public static Maze CreateMaze(MazeFactory factory)
+    public Maze CreateMaze(MazeFactory factory)
     {
         var maze = factory.MakeMaze();
         var r1 = factory.MakeRoom(1);
@@ -45,4 +45,13 @@ public class MazeGame
 
         return maze;
     }
+
+    public Maze CreateMaze(MazeBuilder builder)
+    {
+        builder.BuildMaze();
+        builder.BuildRoom(1);
+        builder.BuildDoor(1, 2);
+        return builder.GetMaze();
+    }
 }
+
