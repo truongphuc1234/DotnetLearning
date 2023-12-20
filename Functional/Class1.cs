@@ -49,6 +49,7 @@ public class DataStore
                 (Budget: 0, Revenue: 0),
                 (acc, cur) => (acc.Budget + cur.Budget, acc.Revenue + cur.Revenue)
                 );
+        return 0;
     }
 
 
