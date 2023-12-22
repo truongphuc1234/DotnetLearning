@@ -59,6 +59,25 @@ public class FuncExam
                 x => x.Any(y => Char.IsSymbol(y)),
             }
         );
+
+    public void Ex6()
+    {
+        var doctorLookup = new[] { (1, "ABC"), (2, "DBE"), (3, "ENF"), (4, "JFJFJ"), }.ToDictionary(
+            x => x.Item1,
+            x => x.Item2
+        );
+    }
+
+    public IEnumerable<int> GenerateRandomNumbers()
+    {
+        var rnd = new Random();
+        var returnValue = new List<int>();
+        for (var i = 0; i < 100; i++)
+        {
+            returnValue.Add(rnd.Next(1, 100));
+        }
+        return returnValue;
+    }
 }
 
 public static class FuncExtension
@@ -77,6 +96,11 @@ public static class FuncExtension
         var match = matches.FirstOrDefault(x => x.IsMatch(@this));
         var returnValue = match.Transform(@this) ?? default;
         return new MatchValueOrDefault<TInput, TOutput>(returnValue, @this);
+    }
+
+    public static Func<TKey, TValue?> ToLookup<TKey, TValue>(this IDictionary<TKey, TValue> @this)
+    {
+        return x => @this.TryGetValue(x, out TValue? value) ? value : default;
     }
 }
 
