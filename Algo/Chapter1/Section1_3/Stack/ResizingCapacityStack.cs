@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Algo.Chapter1.Section1_3;
 
-public class ResizedCapacityStack<T> : IStack<T>
+public class ResizingCapacityStack<T> : IStack<T>
 {
     private T[] arr = new T[1];
     private int size = 0;
@@ -10,7 +10,7 @@ public class ResizedCapacityStack<T> : IStack<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = size;
-        while (current < 0)
+        while (current > 0)
         {
             current--;
             yield return arr[current];
@@ -20,6 +20,11 @@ public class ResizedCapacityStack<T> : IStack<T>
     public bool IsEmpty()
     {
         return size == 0;
+    }
+
+    public T Peek()
+    {
+        return arr[size - 1];
     }
 
     public T Pop()

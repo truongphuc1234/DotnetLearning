@@ -4,4 +4,5 @@ public interface IStack<T> : ICollectable<T>
 {
     public void Push(T item);
     public T Pop();
+    public T Peek();
 }

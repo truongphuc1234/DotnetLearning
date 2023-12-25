@@ -15,10 +15,10 @@ public class FixedCapacityStack<T> : IStack<T>
     public IEnumerator<T> GetEnumerator()
     {
         var current = head;
-        while (current < 0)
+        while (current > 0)
         {
-            yield return arr[current];
             current--;
+            yield return arr[current];
         }
     }
 
@@ -42,8 +42,18 @@ public class FixedCapacityStack<T> : IStack<T>
         return head;
     }
 
+    public bool IsFull()
+    {
+        return head == arr.Length;
+    }
+
     IEnumerator IEnumerable.GetEnumerator()
     {
         return GetEnumerator();
+    }
+
+    public T Peek()
+    {
+        return arr[head - 1];
     }
 }
