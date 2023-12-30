@@ -272,4 +272,104 @@ public class Chapter1Test
         var result = client.MaxRecursive<int>(node1);
         Assert.Equal(5, result);
     }
+
+    [Fact]
+    public void Test_Ex_1_3_29()
+    {
+        var queue = new CircularLinkedList<int>();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        Assert.Equal(new int[] { 1, 2 }, queue.ToArray());
+        Assert.Equal(2, queue.Size());
+        Assert.Equal(1, queue.Dequeue());
+        Assert.Equal(2, queue.Dequeue());
+        Assert.True(queue.IsEmpty());
+        Assert.Equal(new int[] { }, queue.ToArray());
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_30()
+    {
+        var client = new ClientLinkedList();
+        var node1 = new Node<int> { Item = 1, Next = null };
+        client.Insert(node1, 5);
+        client.Insert(node1, 4);
+        client.Insert(node1, 3);
+        client.Insert(node1, 2);
+        var result = client.Reverse<int>(node1);
+        Assert.Equal(5, result.Item);
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_32()
+    {
+        var steque = new LinkedListSteque<int>();
+
+        steque.Push(1);
+        Assert.Equal(1, steque.Pop());
+        steque.Enqueue(9);
+        steque.Push(1);
+        steque.Push(3);
+        Assert.Equal(new int[] { 3, 1, 9 }, steque.ToArray());
+        Assert.Equal(3, steque.Pop());
+        Assert.Equal(1, steque.Pop());
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_33()
+    {
+        var deque = new LinkedListDeque<int>();
+
+        deque.PushLeft(9);
+        deque.PushRight(1);
+        deque.PushRight(3);
+        deque.PushLeft(4);
+        Assert.Equal(new int[] { 4, 9, 1, 3 }, deque.ToArray());
+        Assert.Equal(4, deque.PopLeft());
+        Assert.Equal(3, deque.PopRight());
+        Assert.Equal(9, deque.PopLeft());
+        Assert.Equal(1, deque.PopLeft());
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_33_2()
+    {
+        var deque = new ResizingArrayDeque<int>();
+
+        deque.PushLeft(9);
+        deque.PushRight(1);
+        deque.PushRight(3);
+        deque.PushLeft(4);
+        Assert.Equal(new int[] { 4, 9, 1, 3 }, deque.ToArray());
+        Assert.Equal(4, deque.PopLeft());
+        Assert.Equal(3, deque.PopRight());
+        Assert.Equal(9, deque.PopLeft());
+        Assert.Equal(1, deque.PopLeft());
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_34()
+    {
+        var deque = new RandomBag<int>();
+
+        deque.Add(9);
+        deque.Add(1);
+        deque.Add(3);
+        deque.Add(4);
+        var result = deque.ToArray();
+        Assert.Equal(4, result.Length);
+        Assert.IsType<int>(result.Single(x => x == 9));
+        Assert.IsType<int>(result.Single(x => x == 1));
+        Assert.IsType<int>(result.Single(x => x == 3));
+        Assert.IsType<int>(result.Single(x => x == 4));
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_35()
+    {
+        var deque = new QueueClientDealBridge();
+
+        var result = deque.DealBridge();
+        Assert.Equal(4, result.Length);
+    }
 }
