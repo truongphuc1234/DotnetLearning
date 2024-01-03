@@ -372,4 +372,13 @@ public class Chapter1Test
         var result = deque.DealBridge();
         Assert.Equal(4, result.Length);
     }
+
+    [Fact]
+    public void Test_Ex_1_3_37()
+    {
+        var deque = new QueueClientJosephusProblem();
+
+        var result = deque.Resolve(2, 7);
+        Assert.Equal(new int[] { 1, 3, 5, 0, 4, 2, 6 }, result);
+    }
 }
