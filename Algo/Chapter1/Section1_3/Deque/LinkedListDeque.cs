@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Algo.Chapter1.Section1_3;
 
-public class LinkedListQueue<T> : IQueue<T>
+public class LinkedListDeque<T> : IDeque<T>
 {
     private Node? first;
     private Node? last;
@@ -12,9 +12,10 @@ public class LinkedListQueue<T> : IQueue<T>
     {
         public T Item { get; set; }
         public Node? Next { get; set; }
+        public Node? Prev { get; set; }
     }
 
-    public T Dequeue()
+    public T PopLeft()
     {
         if (IsEmpty())
         {
@@ -30,10 +31,31 @@ public class LinkedListQueue<T> : IQueue<T>
         return item;
     }
 
-    public void Enqueue(T item)
+    public T PopRight()
+    {
+        if (IsEmpty())
+        {
+            throw new Exception("Queue is empty");
+        }
+        var item = last!.Item;
+        last = last.Prev;
+        size--;
+        if (IsEmpty())
+        {
+            first = null;
+        }
+        return item;
+    }
+
+    public void PushRight(T item)
     {
         var oldLast = last;
-        last = new Node { Item = item, Next = null };
+        last = new Node
+        {
+            Item = item,
+            Next = null,
+            Prev = last
+        };
         if (IsEmpty())
         {
             first = last;
@@ -45,7 +67,27 @@ public class LinkedListQueue<T> : IQueue<T>
         size++;
     }
 
-    public bool IsEmpty() => first is null;
+    public void PushLeft(T item)
+    {
+        var oldFirst = first;
+        first = new Node
+        {
+            Item = item,
+            Next = first,
+            Prev = null
+        };
+        if (IsEmpty())
+        {
+            last = first;
+        }
+        else
+        {
+            oldFirst!.Prev = first;
+        }
+        size++;
+    }
+
+    public bool IsEmpty() => first is null || last is null;
 
     public int Size() => size;
 

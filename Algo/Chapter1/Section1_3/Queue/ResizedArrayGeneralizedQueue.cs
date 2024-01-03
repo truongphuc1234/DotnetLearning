@@ -2,35 +2,39 @@ using System.Collections;
 
 namespace Algo.Chapter1.Section1_3;
 
-public class ResizingArrayQueue<T> : IQueue<T>
+public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
 {
     protected T[] arr = new T[1];
     protected int first;
     protected int last;
     protected int size;
 
-    public virtual T Dequeue()
+    public T Delete(int k)
     {
         if (IsEmpty())
         {
             throw new Exception("Queue is empty");
         }
-        var item = arr[first];
-        arr[first] = default;
-        first++;
-        size--;
-        if (first == arr.Length)
+        var item = arr[first + k - 1];
+        if (k <= size)
         {
-            first = 0;
+            arr[first] = default;
+            first++;
+            size--;
+            if (first == arr.Length)
+            {
+                first = 0;
+            }
+            if (size == arr.Length / 4)
+            {
+                Resize(arr.Length / 2);
+            }
+            return item;
         }
-        if (size == arr.Length / 4)
-        {
-            Resize(arr.Length / 2);
-        }
-        return item;
+        return default;
     }
 
-    public virtual void Enqueue(T item)
+    public void Insert(T item)
     {
         if (size == arr.Length)
         {

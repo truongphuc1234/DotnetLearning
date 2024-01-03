@@ -144,4 +144,18 @@ public class ClientLinkedList
             return first.Item;
         }
     }
+
+    public Node<T> Reverse<T>(Node<T> node)
+    {
+        var current = node;
+        Node<T> reversed = null;
+        while (current is not null)
+        {
+            var temp = current.Next;
+            current.Next = reversed;
+            reversed = current;
+            current = temp;
+        }
+        return reversed;
+    }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Algo.Chapter1.Section1_3;
 
-public class LinkedListQueue<T> : IQueue<T>
+public class LinkedListSteque<T> : ISteque<T>
 {
     private Node? first;
     private Node? last;
@@ -14,7 +14,7 @@ public class LinkedListQueue<T> : IQueue<T>
         public Node? Next { get; set; }
     }
 
-    public T Dequeue()
+    public T Pop()
     {
         if (IsEmpty())
         {
@@ -62,5 +62,15 @@ public class LinkedListQueue<T> : IQueue<T>
             yield return current.Item;
             current = current.Next;
         }
+    }
+
+    public void Push(T item)
+    {
+        first = new Node { Item = item, Next = first };
+        if (IsEmpty())
+        {
+            last = first;
+        }
+        size++;
     }
 }

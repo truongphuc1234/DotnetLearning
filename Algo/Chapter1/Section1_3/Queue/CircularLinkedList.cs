@@ -2,9 +2,8 @@ using System.Collections;
 
 namespace Algo.Chapter1.Section1_3;
 
-public class LinkedListQueue<T> : IQueue<T>
+public class CircularLinkedList<T> : IQueue<T>
 {
-    private Node? first;
     private Node? last;
     private int size;
 
@@ -16,36 +15,41 @@ public class LinkedListQueue<T> : IQueue<T>
 
     public T Dequeue()
     {
-        if (IsEmpty())
+        if (last is null)
         {
             throw new Exception("Queue is empty");
         }
-        var item = first!.Item;
-        first = first.Next;
-        size--;
-        if (IsEmpty())
+        var item = last.Next!.Item;
+        if (last.Next == last)
         {
             last = null;
         }
+        else
+        {
+            last.Next = last.Next.Next;
+        }
+        size--;
         return item;
     }
 
     public void Enqueue(T item)
     {
-        var oldLast = last;
-        last = new Node { Item = item, Next = null };
-        if (IsEmpty())
+        if (last is null)
         {
-            first = last;
+            last = new Node { Item = item, Next = null };
+            last.Next = last;
         }
         else
         {
+            var oldLast = last;
+            last = new Node { Item = item, Next = null };
+            last.Next = oldLast.Next;
             oldLast!.Next = last;
         }
         size++;
     }
 
-    public bool IsEmpty() => first is null;
+    public bool IsEmpty() => last is null;
 
     public int Size() => size;
 
@@ -56,11 +60,16 @@ public class LinkedListQueue<T> : IQueue<T>
 
     public IEnumerator<T> GetEnumerator()
     {
-        var current = first;
-        while (current is not null)
+        if (last is not null)
         {
-            yield return current.Item;
+            var current = last.Next;
+            yield return current!.Item;
             current = current.Next;
+            while (current != last.Next)
+            {
+                yield return current!.Item;
+                current = current.Next;
+            }
         }
     }
 }
