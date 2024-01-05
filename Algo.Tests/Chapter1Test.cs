@@ -381,4 +381,28 @@ public class Chapter1Test
         var result = deque.Resolve(2, 7);
         Assert.Equal(new int[] { 1, 3, 5, 0, 4, 2, 6 }, result);
     }
+
+    [Fact]
+    public void Test_Ex_1_3_38()
+    {
+        var queue = new ResizingArrayGeneralizedQueue<int>();
+        queue.Insert(1);
+        queue.Insert(2);
+        queue.Insert(3);
+        queue.Insert(4);
+        Assert.Equal(2, queue.Delete(2));
+        Assert.Equal(3, queue.Delete(2));
+    }
+
+    [Fact]
+    public void Test_Ex_1_3_41()
+    {
+        var queue = new LinkedListQueue<int>();
+        queue.Enqueue(1);
+        queue.Enqueue(2);
+        queue.Enqueue(3);
+        queue.Enqueue(4);
+        var newQueue = new LinkedListQueue<int>(queue);
+        Assert.Equal(new int[] { 1, 2, 3, 4 }, newQueue);
+    }
 }

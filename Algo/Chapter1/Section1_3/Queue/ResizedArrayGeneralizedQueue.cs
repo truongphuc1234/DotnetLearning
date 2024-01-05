@@ -5,8 +5,6 @@ namespace Algo.Chapter1.Section1_3;
 public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
 {
     protected T[] arr = new T[1];
-    protected int first;
-    protected int last;
     protected int size;
 
     public T Delete(int k)
@@ -15,23 +13,22 @@ public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
         {
             throw new Exception("Queue is empty");
         }
-        var item = arr[first + k - 1];
-        if (k <= size)
+        if (k <= 0 || k > size)
         {
-            arr[first] = default;
-            first++;
-            size--;
-            if (first == arr.Length)
-            {
-                first = 0;
-            }
-            if (size == arr.Length / 4)
-            {
-                Resize(arr.Length / 2);
-            }
-            return item;
+            throw new Exception("Out of range");
         }
-        return default;
+        var item = arr[k - 1];
+        for (int i = k - 1; i < size - 1; i++)
+        {
+            arr[i] = arr[i + 1];
+        }
+        arr[size - 1] = default;
+        size--;
+        if (size == arr.Length / 4)
+        {
+            Resize(arr.Length / 2);
+        }
+        return item;
     }
 
     public void Insert(T item)
@@ -40,13 +37,8 @@ public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
         {
             Resize(2 * arr.Length);
         }
-        last++;
+        arr[size] = item;
         size++;
-        if (last == arr.Length)
-        {
-            last = 0;
-        }
-        arr[last] = item;
     }
 
     public bool IsEmpty() => size == 0;
@@ -62,12 +54,7 @@ public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
     {
         for (int i = 0; i < this.size; i++)
         {
-            var index = i + first;
-            if (index >= arr.Length)
-            {
-                index -= arr.Length;
-            }
-            yield return arr[index];
+            yield return arr[i];
         }
     }
 
@@ -76,15 +63,8 @@ public class ResizingArrayGeneralizedQueue<T> : IGeneralizedQueue<T>
         T[] temp = new T[max];
         for (int i = 0; i < this.size; i++)
         {
-            var index = i + first;
-            if (index >= arr.Length)
-            {
-                index -= arr.Length;
-            }
-            temp[i] = arr[index];
+            temp[i] = arr[i];
         }
         arr = temp;
-        first = 0;
-        last = size - 1;
     }
 }

@@ -7,6 +7,23 @@ public class LinkedListStack<T> : IStack<T>
     private Node? first;
     private int size = 0;
 
+    public LinkedListStack() { }
+
+    public LinkedListStack(IStack<T> s)
+    {
+        var temp = new LinkedListStack<T>();
+        while (!s.IsEmpty())
+        {
+            temp.Push(s.Pop());
+        }
+        while (!temp.IsEmpty())
+        {
+            var item = temp.Pop();
+            this.Push(item);
+            s.Push(item);
+        }
+    }
+
     private class Node
     {
         public T Item { get; set; } = default;

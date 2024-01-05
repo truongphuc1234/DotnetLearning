@@ -14,6 +14,18 @@ public class LinkedListQueue<T> : IQueue<T>
         public Node? Next { get; set; }
     }
 
+    public LinkedListQueue() { }
+
+    public LinkedListQueue(IQueue<T> q)
+    {
+        for (int i = 0; i < q.Size(); i++)
+        {
+            var item = q.Dequeue();
+            q.Enqueue(item);
+            this.Enqueue(item);
+        }
+    }
+
     public T Dequeue()
     {
         if (IsEmpty())
