@@ -405,4 +405,18 @@ public class Chapter1Test
         var newQueue = new LinkedListQueue<int>(queue);
         Assert.Equal(new int[] { 1, 2, 3, 4 }, newQueue);
     }
+
+    [Fact]
+    public void Test_Ex_1_3_44()
+    {
+        var buffer = new TextBuffer();
+        buffer.Insert('h');
+        buffer.Insert('y');
+        buffer.Insert('a');
+        buffer.Insert('l');
+        buffer.Insert('r');
+        buffer.Insert('j');
+        buffer.Left(3);
+        Assert.Equal('l', buffer.Delete());
+    }
 }
