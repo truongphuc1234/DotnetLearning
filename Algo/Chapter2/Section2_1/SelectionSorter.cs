@@ -15,7 +15,7 @@ public class SelectionSorter
                     min = j;
                 }
             }
-            (a[i], a[min]) = (a[min], a[i]);
+            a.Exchange<T>(i ,min);
         }
     }
 }

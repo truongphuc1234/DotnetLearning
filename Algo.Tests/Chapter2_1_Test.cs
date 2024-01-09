@@ -39,4 +39,22 @@ public class Chapter2_1Test
         sorter.Sort(arr);
         Assert.Equal("AEELMOPRSTX", string.Join("", arr));
     }
+
+    [Fact]
+    public void Test_Ex_2_1_13_Work()
+    {
+        var client = new DeckSorter();
+        var cards = client.PrepareCards();
+        client.Sort(cards);
+        Assert.True(cards.IsSorted());
+    }
+
+    [Fact]
+    public void Test_Ex_2_1_14_Work()
+    {
+        var client = new DeckSorter();
+        var cards = client.PrepareCards();
+        var newCards = client.DequeueSort(cards);
+        Assert.True(cards.IsSorted());
+    }
 }

@@ -13,7 +13,7 @@ public class ShellSorterV2
             {
                 for (int j = i; j >= h && a[j].Less(a[j - h]); j -= h)
                 {
-                    (a[j], a[j - h]) = (a[j - h], a[j]);
+                    a.Exchange(j, j - h);
                 }
             }
         }

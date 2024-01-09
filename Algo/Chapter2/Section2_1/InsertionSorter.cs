@@ -6,9 +6,9 @@ public class InsertionSorter
     {
         for (int i = 1; i < a.Length; i++)
         {
-            for (int j = i; j > 0 && a[j].Less(a[j-1]); j--)
+            for (int j = i; j > 0 && a[j].Less(a[j - 1]); j--)
             {
-                (a[j], a[j-1]) = (a[j-1], a[j]);
+                a.Exchange(j, j - 1);
             }
         }
     }

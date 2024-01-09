@@ -16,7 +16,7 @@ public class ShellSorter
             {
                 for (int j = i; j >= h && a[j].Less(a[j - h]); j -= h)
                 {
-                    (a[j], a[j - h]) = (a[j - h], a[j]);
+                    a.Exchange<T>(j, j - h);
                 }
             }
             h /= 3;
