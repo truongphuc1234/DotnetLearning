@@ -23,10 +23,10 @@ public class DeckSorter
             deque.PushRight(card);
         }
         var hasSwap = true;
-        while (!hasSwap)
+        while (hasSwap)
         {
             hasSwap = false;
-            for (int i = 0; i < cards.Length -1; i++)
+            for (int i = 0; i < cards.Length - 1; i++)
             {
                 var card1 = deque.PopLeft();
                 var card2 = deque.PopLeft();
@@ -55,11 +55,7 @@ public class DeckSorter
         {
             for (int j = 1; j <= 13; j++)
             {
-                cards[index] = new Card
-                {
-                    Suit = (Suit)i,
-                    Rank = j
-                };
+                cards[index] = new Card { Suit = (Suit)i, Rank = j };
                 index++;
             }
         }

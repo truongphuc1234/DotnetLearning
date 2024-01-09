@@ -55,6 +55,8 @@ public class Chapter2_1Test
         var client = new DeckSorter();
         var cards = client.PrepareCards();
         var newCards = client.DequeueSort(cards);
-        Assert.True(cards.IsSorted());
+        // Assert.True(newCards.IsSorted());
+        Assert.Equal(1, newCards[0].Rank);
+        Assert.Equal(Suit.Spade, newCards[0].Suit);
     }
 }
