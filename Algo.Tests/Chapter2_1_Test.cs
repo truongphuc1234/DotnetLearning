@@ -23,6 +23,24 @@ public class Chapter2_1Test
     }
 
     [Fact]
+    public void TestInsertionSortWithSentinel_Work()
+    {
+        var arr = "SORTEXAMPLE".ToCharArray();
+        var sorter = new InsertionSorter();
+        sorter.SortWithSentinel(arr);
+        Assert.Equal("AEELMOPRSTX", string.Join("", arr));
+    }
+
+    [Fact]
+    public void TestInsertionSortWithoutExchange_Work()
+    {
+        var arr = "SORTEXAMPLE".ToCharArray();
+        var sorter = new InsertionSorter();
+        sorter.SortWithoutExchange(arr);
+        Assert.Equal("AEELMOPRSTX", string.Join("", arr));
+    }
+
+    [Fact]
     public void TestShellSort_Work()
     {
         var arr = "SORTEXAMPLE".ToCharArray();
@@ -55,7 +73,7 @@ public class Chapter2_1Test
         var client = new DeckSorter();
         var cards = client.PrepareCards();
         var newCards = client.DequeueSort(cards);
-        // Assert.True(newCards.IsSorted());
+        Assert.True(newCards.IsSorted());
         Assert.Equal(1, newCards[0].Rank);
         Assert.Equal(Suit.Spade, newCards[0].Suit);
     }
