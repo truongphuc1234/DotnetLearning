@@ -1,3 +1,4 @@
+using Algo.Chapter2.Helper;
 using Algo.Chapter2.Section2_1;
 
 namespace Algo.Tests;

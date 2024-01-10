@@ -1,3 +1,4 @@
+using Algo.Chapter2.Helper;
 using Algo.Chapter1.Section1_3;
 
 namespace Algo.Chapter2.Section2_1;

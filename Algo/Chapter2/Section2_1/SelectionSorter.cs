@@ -1,3 +1,5 @@
+using Algo.Chapter2.Helper;
+
 namespace Algo.Chapter2.Section2_1;
 
 public class SelectionSorter

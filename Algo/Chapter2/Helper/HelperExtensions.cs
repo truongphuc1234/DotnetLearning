@@ -1,4 +1,4 @@
-namespace Algo.Chapter2.Section2_1;
+namespace Algo.Chapter2.Helper;
 
 public static class HelperExtensions
 {
