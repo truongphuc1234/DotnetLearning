@@ -1,5 +1,4 @@
-
-namespace DotnetDesignPattern.Builder;
+namespace DotnetDesignPattern.Builder.Person;
 
 public class PersonJobBuilder : PersonBuilder
 {
