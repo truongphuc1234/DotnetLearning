@@ -15,6 +15,15 @@ public class Chapter2_2Test
     }
 
     [Fact]
+    public void TestMergeSortWithSecondDecrease_Work()
+    {
+        var arr = "SORTEXAMPLE".ToCharArray();
+        var sorter = new MergeSorterWithSecondDecreasing<char>();
+        sorter.Sort(arr);
+        Assert.Equal("AEELMOPRSTX", string.Join("", arr));
+    }
+
+    [Fact]
     public void TestMergeSortBottomUp_Work()
     {
         var arr = "SORTEXAMPLE".ToCharArray();

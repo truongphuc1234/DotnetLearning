@@ -4,7 +4,7 @@ namespace Algo.Chapter2.Section2_2;
 
 public class MergeSorter<T> where T : IComparable<T>
 {
-    private T[] aux = new T[0];
+    protected T[] aux = new T[0];
 
     public void Sort(T[] a)
     {
@@ -12,7 +12,7 @@ public class MergeSorter<T> where T : IComparable<T>
         Sort(a, 0, a.Length - 1);
     }
 
-    private void Sort(T[] a, int low, int high)
+    protected void Sort(T[] a, int low, int high)
     {
         if (high <= low) { return; }
         int mid = (low + high) / 2;
@@ -21,7 +21,7 @@ public class MergeSorter<T> where T : IComparable<T>
         Merge(a, low, mid, high);
     }
 
-    private void Merge(T[] a, int low, int mid, int high)
+    protected virtual void Merge(T[] a, int low, int mid, int high)
     {
         int i = low;
         int j = mid + 1;
@@ -53,4 +53,5 @@ public class MergeSorter<T> where T : IComparable<T>
             }
         }
     }
+
 }
